@@ -35,15 +35,12 @@ public class ProducerDemoKeys {
                 ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, value);
 
                 // send data
-                producer.send(record, new Callback() {
-                    @Override
-                    public void onCompletion(RecordMetadata recordMetadata, Exception e) {
+                producer.send(record, (recordMetadata, e) -> {
                         if (e != null) {
                             LOG.error("Error while producing", e);
                         } else {
                             LOG.info("Key: " + key + " | Partition: " + recordMetadata.partition());
                         }
-                    }
                 });
             }
 

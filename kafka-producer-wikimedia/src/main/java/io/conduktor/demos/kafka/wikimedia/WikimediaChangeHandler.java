@@ -18,14 +18,15 @@ public class WikimediaChangeHandler implements BackgroundEventHandler {
         this.producer = producer;
         this.topic = topic;
     }
+
     @Override
-    public void onOpen() throws Exception {
+    public void onOpen() {
         // nothing here
         logger.info("Wikimedia change handler onOpen");
     }
 
     @Override
-    public void onClosed() throws Exception {
+    public void onClosed() {
         producer.close();
     }
 

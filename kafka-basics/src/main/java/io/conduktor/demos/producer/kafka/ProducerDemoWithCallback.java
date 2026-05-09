@@ -32,9 +32,7 @@ public class ProducerDemoWithCallback {
                 ProducerRecord<String, String> record = new ProducerRecord<>("demo_java", "hello world " + i);
 
                 // send data
-                producer.send(record, new Callback() {
-                    @Override
-                    public void onCompletion(RecordMetadata recordMetadata, Exception e) {
+                producer.send(record, (recordMetadata, e) -> {
                         if (e != null) {
                             LOG.error("Error while producing", e);
                         } else  {
@@ -45,7 +43,6 @@ public class ProducerDemoWithCallback {
                                     "Timestamp: " + recordMetadata.timestamp() + "\n"
                             );
                         }
-                    }
                 });
             }
             try {
